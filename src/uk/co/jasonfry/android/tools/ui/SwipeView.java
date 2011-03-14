@@ -264,7 +264,7 @@ public class SwipeView extends HorizontalScrollView
 	 */
 	public void scrollToPage(int page)
 	{
-		scrollToPage(page,false);
+		scrollToPage(page, false);
 	}
 	
 	/**
@@ -357,7 +357,6 @@ public class SwipeView extends HorizontalScrollView
 	public void setPageControl(PageControl pageControl)
 	{
 		mPageControl = pageControl;
-		
 		pageControl.setPageCount(getPageCount());
 		pageControl.setCurrentPage(mCurrentPage);
 		pageControl.setOnPageControlClickListener(new OnPageControlClickListener() 

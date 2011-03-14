@@ -78,7 +78,6 @@ public class PageControl extends LinearLayout
 		Log.i("uk.co.jasonfry.android.tools.ui.PageControl","Initialising PageControl");
 		
 		indicators = new ArrayList<ImageView>();
-		
 		activeDrawable = new ShapeDrawable();
 		inactiveDrawable = new ShapeDrawable();
 		
@@ -158,18 +157,18 @@ public class PageControl extends LinearLayout
 		});
 	}
 	
-	/**
-	 * Set the drawable object for an active page indicator
-	 * 
-	 * @param d The drawable object for an active page indicator
-	 */
-	public void setActiveDrawable(Drawable d)
-	{
-		activeDrawable = d;
-		
-		indicators.get(mCurrentPage).setBackgroundDrawable(activeDrawable);
-		
-	}
+//	/**
+//	 * Set the drawable object for an active page indicator
+//	 * 
+//	 * @param d The drawable object for an active page indicator
+//	 */
+//	public void setActiveDrawable(Drawable d)
+//	{
+//		activeDrawable = d;
+//		
+//		indicators.get(mCurrentPage).setBackgroundDrawable(activeDrawable);
+//		
+//	}
 	
 	/**
 	 *  Return the current drawable object for an active page indicator
@@ -181,22 +180,22 @@ public class PageControl extends LinearLayout
 		return activeDrawable;
 	}
 	
-	/**
-	 *  Set the drawable object for an inactive page indicator
-	 * 
-	 * @param d The drawable object for an inactive page indicator
-	 */
-	public void setInactiveDrawable(Drawable d)
-	{
-		inactiveDrawable = d;
-		
-		for(int i=0; i<mPageCount; i++)
-		{
-			indicators.get(i).setBackgroundDrawable(inactiveDrawable);
-		}
-		
-		indicators.get(mCurrentPage).setBackgroundDrawable(activeDrawable);
-	}
+//	/**
+//	 *  Set the drawable object for an inactive page indicator
+//	 * 
+//	 * @param d The drawable object for an inactive page indicator
+//	 */
+//	public void setInactiveDrawable(Drawable d)
+//	{
+//		inactiveDrawable = d;
+//		
+//		for(int i=0; i<mPageCount; i++)
+//		{
+//			indicators.get(i).setBackgroundDrawable(inactiveDrawable);
+//		}
+//		
+//		indicators.get(mCurrentPage).setBackgroundDrawable(activeDrawable);
+//	}
 
 	/**
 	 * Return the current drawable object for an inactive page indicator
@@ -216,6 +215,8 @@ public class PageControl extends LinearLayout
 	public void setPageCount(int pageCount)
 	{
 		mPageCount = pageCount;
+		removeAllViews();
+		indicators = new ArrayList<ImageView>();
 		for(int i=0;i<pageCount;i++)
 		{
 			final ImageView imageView = new ImageView(mContext);
@@ -223,10 +224,11 @@ public class PageControl extends LinearLayout
 			params.setMargins(mIndicatorSize/2, mIndicatorSize, mIndicatorSize/2, mIndicatorSize);
 			imageView.setLayoutParams(params);
 			imageView.setBackgroundDrawable(inactiveDrawable);
-
+			
 			indicators.add(imageView);
 			addView(imageView);
 		}
+		invalidate();
 	}
 	
 	/**
@@ -249,8 +251,8 @@ public class PageControl extends LinearLayout
 		if(currentPage<mPageCount)
 		{
 			indicators.get(mCurrentPage).setBackgroundDrawable(inactiveDrawable);//reset old indicator
-			indicators.get(currentPage).setBackgroundDrawable(activeDrawable);//set up new indicator
 			mCurrentPage = currentPage;
+			indicators.get(mCurrentPage).setBackgroundDrawable(activeDrawable);//set up new indicator
 		}
 	}
 	
